@@ -19,6 +19,7 @@ Folder Structure Conventions
     .
     ├── docker_resources        # Contains Dockerfile for resources
     ├── deployment_descriptors  # Kubernetes Orchestration Definitions
+    ├── docs                    # Documentation files (alternatively `doc`)
     └── README.md
 
 > Use short lowercase names at least for the top-level files and folders except
