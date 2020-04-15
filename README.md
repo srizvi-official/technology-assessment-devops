@@ -1,15 +1,12 @@
 # Objective
 In this exercise we need to create automated Kubernetes deployment, this deployment must build Jenkins &amp; Sonar docker images and &amp; run on Kubernetes. Jenkins Docker must have maven support, Java 11 support. Jenkins pipeline must work smoothly once the setup is complete.
 
-
 # Tools and utilities:
-Jenkins
- - Apache Maven 3.3
- - Java 11
-SonarQube
-Docker 
-AWS EKS (Managed Kubernetes Cluster)
-Kubectl
+- Jenkins  
+- SonarQube
+- Docker 
+- AWS EKS Managed Kubernetes Cluster
+- Kubectl
 
 
 Folder Structure Conventions
