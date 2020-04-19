@@ -42,6 +42,10 @@ Thought process behind giving two implementations is to demonstrate options and 
 **Approach A**: is ready made scripts with little modifications to setup things fast. Rational is just to put another option on table.
 **Approach B**: is simple and flexible but limited. Due to time constraint I didn't implement the helm chart in this solution, but, if I get time will do over the weekend. 
 
+- I created custom image of Jenkins because configiration automation is required.
+- I used SonarQube image from registery hub directly as no customization is required.
+
+
 Tailored Implementation
 =======================
 
