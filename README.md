@@ -71,14 +71,14 @@ Kubernetes Components / Orchbestration - Approach Load balancer
 ===============================================================
 **Note:** This approach is use for the feasability but not good for production grade deployments with multiple microservices. But, good for building, testing and exposing test projects.
 
-![k8s-active-components-orchestration-flow](https://linuxacademy.com/site-content/uploads/2019/05/Screen-Shot-2019-04-17-at-10.58.43-AM-1024x769.png)
+![k8s-active-components-orchestration-flow](https://raw.githubusercontent.com/srizvi-official/technology-assessment-devops/master/tailored-implementation/docs/k8s-active-components-orchestration-flow.png)
 
 Kubernetes Components / Orchbestration - Approach Ingress Controller
 ====================================================================
 
 **Note:** I have implemented this approach but didn't used it because dns and domain is private (which is configured). But, its is good for production grade deployments.
 
-![k8s-alternative-components-orchestration-flow](https://linuxacademy.com/site-content/uploads/2019/05/Screen-Shot-2019-04-17-at-10.58.43-AM-1024x769.png)
+![k8s-alternative-components-orchestration-flow](https://raw.githubusercontent.com/srizvi-official/technology-assessment-devops/master/tailored-implementation/docs/k8s-alternative-components-orchestration-flow.png)
 
 
 Steps to Follow
