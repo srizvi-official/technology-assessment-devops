@@ -48,7 +48,7 @@ Tailored Implementation
 Browse directory structure of main project.
 
 ### A typical sub-level directory layout
-
+```
 .
 	├── docker-source					# holds code for pre-configured Jenkins server 
 	│   ├── Dockerfile						# Jenkins DockerFile - this definition used to create image for Kubernetes container
@@ -63,7 +63,7 @@ Browse directory structure of main project.
 	│   ├── k8s-alternative-components-orchestration-flow.png	# This is now we can configure using ingress file (Ingress controller)	
 	│   └── k8s-active-components-orchestration-flow.png		# This how current solution is implemented (load balancer)	
     └── README.md	
-    
+```    
 > Use short lowercase names at least for the top-level files and folders except
 > `LICENSE`, `README.md`
 
@@ -83,7 +83,7 @@ Kubernetes Components / Orchbestration - Approach Ingress Controller
 
 Steps to Follow
 ===============
-
+```
 1) Clone code to your work space.
 2) Make sure prerequisite are ready.
 3) Docker images are already created but source files are in `tailored-implementation/docker-source` folder. (skip this step unless you want to create new image)
@@ -91,7 +91,7 @@ Steps to Follow
 #Create images with given DockerFile(s)
 docker build -t testappstudio/delivery-pipeline:jenkins
 
-# Push images to image registery service (contact me at srizvi@csquareonline.com for credentials)
+#Push images to image registery service (contact me at srizvi@csquareonline.com for credentials)
 docker login
 docker push testappstudio/delivery-pipeline:jenkins
 
@@ -138,3 +138,4 @@ On success you will receive following
 8) I have executed it myself (end to end) and all the stages passed successfully :)
 
 **Note:** We can put all the commands in batch script if we want to execute this like a single job and completely automate it. 
+```
