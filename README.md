@@ -2,17 +2,16 @@
 In this exercise we need to create automated Kubernetes deployment, this deployment must build Jenkins &amp; Sonar docker images and &amp; run on Kubernetes. Jenkins Docker must have maven support, Java 11 support. Jenkins pipeline must work smoothly once the setup is complete.
 
 # Tools and utilities:
-- Jenkins  
-- SonarQube
-- Docker 
-- Kubernetes Cluster (must be pre setup not part of this implementation - We can provision it using any IaC tool standard definitions)
+- Docker  
 - Kubectl
-- Shell Script
+- Helm
+- kustomize
+- Curl
 
 Prerequisite
 ============
 
-- Running Kubernetes Cluster
+- Running Kubernetes Cluster (We can provision it using any IaC tool standard definitions)
 - Kubectl utility configured
 - Linux OS
 - These ports must whitelisted 8080 and 9000 
