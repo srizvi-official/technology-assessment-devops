@@ -67,14 +67,14 @@ Browse directory structure of main project.
 > Use short lowercase names at least for the top-level files and folders except
 > `LICENSE`, `README.md`
 
-Kubernetes Components / Orchbestration - Approach Load balancer 
-===============================================================
+Kubernetes Components / Orchbestration - Approach Load balancer (Bonus Activity) 
+================================================================================
 **Note:** This approach is use for the feasability but not good for production grade deployments with multiple microservices. But, good for building, testing and exposing test projects.
 
 ![k8s-active-components-orchestration-flow](https://raw.githubusercontent.com/srizvi-official/technology-assessment-devops/master/tailored-implementation/docs/k8s-active-components-orchestration-flow.png)
 
-Kubernetes Components / Orchbestration - Approach Ingress Controller
-====================================================================
+Kubernetes Components / Orchbestration - Approach Ingress Controller (Bonus Activity)
+=====================================================================================
 
 **Note:** I have implemented this approach but didn't used it because dns and domain is private (which is configured). But, its is good for production grade deployments.
 
@@ -124,14 +124,13 @@ Password: admin123
 6) SonarQube configuration
 
 Create a webhook programmatically by hitting SonarQube API (Replace the placeholder in below command before execution) 
-curl "http://admin:admin@<SONAR_IP>:<SONAR_PORT>/api/webhooks/create" -X POST -d "name=jenkins&url=http://jenkins-service:8080/sonarqube-webhook/"
+curl "http://admin:admin@<SONAR_EXTERNAL_IP>:<SONAR_PORT>/api/webhooks/create" -X POST -d "name=jenkins&url=http://jenkins-service:8080/sonarqube-webhook/"
 
 After Interpolation its look like (example)
 "http://admin:admin@35.232.117.174:9000/api/webhooks/create" -X POST -d "name=jenkins&url=http://jenkins-service:8080/sonarqube-webhook/"
 
 On success you will receive following
 {"webhook":{"key":"AXGP3k5nfDBDMMWYZ_WB","name":"jenkins","url":"http://jenkins-service:8080/sonarqube-webhook/"}
-  
  
 7) Login to Jenkins and see the results of the delivery pipeline.
 
