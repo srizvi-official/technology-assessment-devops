@@ -62,6 +62,7 @@ Browse directory structure of main project.
 	├── docs											# Bonus task: Kubernetes component diagram for this project. (helm chart -> facing time constraint)
 	│   ├── k8s-alternative-components-orchestration-flow.png	# This is now we can configure using ingress file (Ingress controller)	
 	│   └── k8s-active-components-orchestration-flow.png		# This how current solution is implemented (load balancer)	
+	│   └── helm-charts-delivery-pipeline						# Helm chart for this project - WIP (need to configure it)		
     └── README.md	
 ```    
 > Use short lowercase names at least for the top-level files and folders except
