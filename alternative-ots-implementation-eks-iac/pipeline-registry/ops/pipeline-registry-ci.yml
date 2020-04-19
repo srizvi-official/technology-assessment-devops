@@ -1,0 +1,44 @@
+team: cicd
+email: srizvi@csquareonline.com
+slack: pipeline_registry_jenkins
+project: yaml
+agent: pipeline-generator-agent
+source: bitbucket
+dockerenv: local
+parameters:
+  - name: "PR_BRANCH"
+    description: "PR source branch"
+    defaultValue: ""
+ 
+  - name: "PR_BASE_BRANCH"
+    description: "PR destination branch"
+    defaultValue: ""
+ 
+  - name: "COMMIT_ID"
+    description: "Commit hash for the latest commit on the source branch"
+    defaultValue: ""
+ 
+  - name: "PR_ID"
+    description: "PD Id"
+    defaultValue: ""
+ 
+  - name: "REPO_SLUG"
+    description: "Repository name aka. slug"
+    defaultValue: ""
+ 
+  - name: "PROJECT_NAME"
+    description: "Project name"
+    defaultValue: ""
+
+stages:
+    - lint
+    - contract-check
+
+jobs:
+    - name: lint
+      stage: lint
+      cmd: make lint
+
+    - name: contract-check
+      stage: contract-check
+      cmd: make contract-check

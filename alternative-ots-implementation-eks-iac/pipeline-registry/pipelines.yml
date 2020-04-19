@@ -1,0 +1,19 @@
+---
+pipelines:
+  - pipeline: your-service-name-cd
+    service: marketplace-infra
+    repo: <sevice repo link>
+    path: ops/your-service-name-cd.yml
+    branch: master
+    serviceName: your-service-name
+    product: team-name
+    domain: domain-name
+
+  - pipeline: your-service-name-cd
+      service: marketplace-infra
+      repo: <sevice repo link>
+      path: ops/your-service-name-cd.yml
+      branch: master
+      serviceName: your-service-name
+      product: team-name
+      domain: domain-name

@@ -1,0 +1,76 @@
+jenkins:
+  systemMessage: "Happy Automation"
+
+  numExecutors: 1
+  mode: NORMAL
+  scmCheckoutRetryCount: 3
+  labelString: "master-label"  
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: admin
+         password: ${adminpw:-admin123}
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+  crumbIssuer: "standard"
+
+  remotingSecurity:
+    enabled: true    
+
+unclassified:
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+      - name: "sonar"
+        serverUrl: "http://sonar-service:9000"
+
+  mailer:
+    authentication:
+      password: ""
+      username: "yourusername@gmail.com"
+    charset: "UTF-8"
+    smtpHost: "smtp.gmail.com"
+    smtpPort: "465"
+    useSsl: true
+    useTls: false
+
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  jdk:
+    installations:
+    - name: "open-jdk8"
+  maven:
+    installations:
+    - name: "Maven 3"
+      properties:
+      - installSource:
+          installers:
+            - maven:
+                id: "3.5.4"
+jobs:
+  - script: >
+      pipelineJob('Sonar-Test') {
+          definition {
+            triggers {
+                  cron('H/5 * * * *')
+            }     
+            cpsScm {
+                  scriptPath 'Jenkinsfile'
+                  scm {
+                    git {
+                        remote { url 'https://bitbucket.org/gabriel-a/template-microservice.git' }
+                        branch '*/master'
+                        extensions {}
+                    }
+                  }
+              }
+          }
+      }

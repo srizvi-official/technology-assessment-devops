@@ -1,0 +1,144 @@
+apiVersion: v1
+data:
+  MYSQL_DATABASE: sonar
+kind: ConfigMap
+metadata:
+  name: mysql-env
+  namespace: delivery-pipeline
+---
+apiVersion: v1
+data:
+  SONARQUBE_JDBC_URL: jdbc:mysql://sonar-mysql:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+kind: ConfigMap
+metadata:
+  name: sonar-env
+  namespace: delivery-pipeline
+---
+apiVersion: v1
+data:
+  mysql-password: c29uYXI=
+  mysql-root-password: c29uYXI=
+  mysql-user: c29uYXI=
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: delivery-pipeline
+type: Opaque
+---
+apiVersion: v1
+data:
+  SONARQUBE_JDBC_PASSWORD: c29uYXI=
+  SONARQUBE_JDBC_USERNAME: c29uYXI=
+kind: Secret
+metadata:
+  name: sonar-secret
+  namespace: delivery-pipeline
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: sonar-mysql
+  name: sonar-mysql
+  namespace: delivery-pipeline
+spec:
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+  selector:
+    app: sonar-mysql
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: sonar-service
+  name: sonar-service
+  namespace: delivery-pipeline
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: sonar
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: sonar-mysql
+  name: sonar-mysql
+  namespace: delivery-pipeline
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonar-mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-root-password
+              name: mysql-secret
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-password
+              name: mysql-secret
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: mysql-user
+              name: mysql-secret
+        envFrom:
+        - configMapRef:
+            name: mysql-env
+        image: mysql:5.7
+        name: sonar-mysql
+        ports:
+        - containerPort: 3306
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: sonar
+  name: sonar
+  namespace: delivery-pipeline
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonar
+    spec:
+      containers:
+      - env:
+        - name: sonar
+          value: sonar-service
+        - name: SONARQUBE_JDBC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: SONARQUBE_JDBC_PASSWORD
+              name: sonar-secret
+        - name: SONARQUBE_JDBC_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: SONARQUBE_JDBC_USERNAME
+              name: sonar-secret
+        envFrom:
+        - configMapRef:
+            name: sonar-env
+        image: sonarqube:7.1-alpine
+        name: sonarqube
+        ports:
+        - containerPort: 9000
+          name: sonarqube

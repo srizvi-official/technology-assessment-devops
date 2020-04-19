@@ -1,0 +1,6 @@
+---
+#creating Namespace For delivery-pipeline Project
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: delivery-pipeline

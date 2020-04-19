@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: delivery-pipeline
+  labels:
+    name: jenkins-service
+  name: jenkins-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: jenkins
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins
+  name: jenkins
+  namespace: delivery-pipeline
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - image: testappstudio/delivery-pipeline:jenkins
+        imagePullPolicy: Always
+        name: jenkins
+        ports:
+        - containerPort: 8080
+          name: jenkins
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-volume
+  namespace: delivery-pipeline
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

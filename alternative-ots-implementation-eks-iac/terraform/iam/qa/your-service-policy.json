@@ -1,0 +1,211 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:Describe*",
+        "events:DescribeRule",
+        "events:PutRule",
+        "iam:ListRoles",
+        "elasticloadbalancing:*",
+        "cloudwatch:GetMetricStatistics",
+        "iam:ListInstanceProfiles",
+        "cloudformation:DescribeStack*",
+        "events:DeleteRule",
+        "events:PutTargets",
+        "ec2:Describe*",
+        "iam:PassRole",
+        "events:ListRuleNamesByTarget",
+        "cloudformation:CreateStack",
+        "cloudformation:DeleteStack",
+        "ecs:*",
+        "ecr:*",
+        "cloudformation:UpdateStack",
+        "autoscaling:UpdateAutoScalingGroup",
+        "events:RemoveTargets",
+        "events:ListTargetsByRule",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "dax:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": [
+        "rds:Describe*"
+      ],
+      "Resource": [
+        "arn:aws:rds:eu-west-1:${data.aws_caller_identity.account_id}:db:bbdatacenter-datacenter-db",
+        "arn:aws:rds:eu-west-1:${data.aws_caller_identity.account_id}:snapshot:bbdatacenter-datacenter-db-09082019"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rekognition:*",
+        "kinesis:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "dynamodb:*",
+        "dax:*",
+        "application-autoscaling:DeleteScalingPolicy",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingActivities",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:PutScalingPolicy",
+        "application-autoscaling:RegisterScalableTarget",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarmHistory",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:DescribeAlarmsForMetric",
+        "cloudwatch:GetMetricStatistics",
+        "cloudwatch:ListMetrics",
+        "cloudwatch:PutMetricAlarm",
+        "datapipeline:ActivatePipeline",
+        "datapipeline:CreatePipeline",
+        "datapipeline:DeletePipeline",
+        "datapipeline:DescribeObjects",
+        "datapipeline:DescribePipelines",
+        "datapipeline:GetPipelineDefinition",
+        "datapipeline:ListPipelines",
+        "datapipeline:PutPipelineDefinition",
+        "datapipeline:QueryObjects",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "iam:GetRole",
+        "iam:ListRoles",
+        "sns:CreateTopic",
+        "sns:DeleteTopic",
+        "sns:ListSubscriptions",
+        "sns:ListSubscriptionsByTopic",
+        "sns:ListTopics",
+        "sns:Subscribe",
+        "sns:Unsubscribe",
+        "sns:SetTopicAttributes",
+        "lambda:CreateFunction",
+        "lambda:ListFunctions",
+        "lambda:ListEventSourceMappings",
+        "lambda:CreateEventSourceMapping",
+        "lambda:DeleteEventSourceMapping",
+        "lambda:GetFunctionConfiguration",
+        "lambda:DeleteFunction",
+        "resource-groups:ListGroups",
+        "resource-groups:ListGroupResources",
+        "resource-groups:GetGroup",
+        "resource-groups:GetGroupQuery",
+        "resource-groups:DeleteGroup",
+        "resource-groups:CreateGroup",
+        "tag:GetResources",
+        "ec2:DescribeTags",
+        "ec2:DescribeInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "iam:PassedToService": [
+            "application-autoscaling.amazonaws.com",
+            "dax.amazonaws.com"
+          ]
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": [
+            "replication.dynamodb.amazonaws.com",
+            "dax.amazonaws.com",
+            "dynamodb.application-autoscaling.amazonaws.com"
+          ]
+        }
+      }
+    },
+    {
+      "Action": "elasticache:*",
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": "iam:CreateServiceLinkedRole",
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "elasticache.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Action": [
+        "secretsmanager:*",
+        "cloudformation:CreateChangeSet",
+        "cloudformation:DescribeChangeSet",
+        "cloudformation:DescribeStackResource",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ExecuteChangeSet",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "kms:ListKeys",
+        "lambda:ListFunctions",
+        "rds:DescribeDBClusters",
+        "rds:DescribeDBInstances",
+        "tag:GetResources"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "lambda:AddPermission",
+        "lambda:CreateFunction",
+        "lambda:GetFunction",
+        "lambda:InvokeFunction",
+        "lambda:UpdateFunctionConfiguration"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:lambda:*:*:function:SecretsManager*"
+    },
+    {
+      "Action": [
+        "serverlessrepo:CreateCloudFormationChangeSet"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:serverlessrepo:*:*:applications/SecretsManager*"
+    },
+    {
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:s3:::awsserverlessrepo-changesets*"
+        ]
+    }
+  ]
+}
